@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "simple-orchestration", "simple-orchestration.csproj", "{DE8B1631-6F0E-4199-A6CB-E283F76D892C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "obj", "obj", "{0B36D8AA-8927-475F-89FA-AD088626700B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{C9538C61-4157-4EF9-B133-BCEEBEB597E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8.0", "net8.0", "{32CBC723-1DB8-41A9-AC96-49E79873D55C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerExtensions", "obj\Debug\net8.0\WorkerExtensions\WorkerExtensions.csproj", "{40A9E80E-6870-4FEB-B098-F68B478ECC41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE8B1631-6F0E-4199-A6CB-E283F76D892C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE8B1631-6F0E-4199-A6CB-E283F76D892C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE8B1631-6F0E-4199-A6CB-E283F76D892C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE8B1631-6F0E-4199-A6CB-E283F76D892C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A9E80E-6870-4FEB-B098-F68B478ECC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A9E80E-6870-4FEB-B098-F68B478ECC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A9E80E-6870-4FEB-B098-F68B478ECC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A9E80E-6870-4FEB-B098-F68B478ECC41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9538C61-4157-4EF9-B133-BCEEBEB597E9} = {0B36D8AA-8927-475F-89FA-AD088626700B}
+		{32CBC723-1DB8-41A9-AC96-49E79873D55C} = {C9538C61-4157-4EF9-B133-BCEEBEB597E9}
+		{40A9E80E-6870-4FEB-B098-F68B478ECC41} = {32CBC723-1DB8-41A9-AC96-49E79873D55C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBC94FB3-C9E6-41EA-A08E-DAB00DEB836C}
+	EndGlobalSection
+EndGlobal
