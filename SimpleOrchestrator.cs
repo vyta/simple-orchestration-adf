@@ -28,48 +28,42 @@ namespace SimpleOrchestration
             };
 
             int completed = 0;
-            try 
+            try
             {
                 foreach (var step in steps)
                 {
                     // Can additionally add retries here with retry options for the activity itself
-                    if(await context.CallActivityAsync<bool>(step.ActivityName, deliverable))
-                    {                        
+                    if (await context.CallActivityAsync<bool>(step.ActivityName, deliverable))
+                    {
                         completed++;
                         outputs.Add($"{step.ActivityName} completed successfully.");
                     }
-                    else 
+                    else
                     {
                         outputs.Add($"{step.ActivityName} failed.");
                         throw new Exception($"Unable to complete {step.ActivityName}");
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                try
+                logger.LogInformation("Starting to execute compensation...");
+                foreach (var completedStep in steps.Take(completed).Reverse())
                 {
-                    logger.LogInformation("Starting to execute compensation...");
-                    foreach (var completedStep in steps.Take(completed).Reverse())
+                    if (await context.CallActivityAsync<bool>(completedStep.CompensationActivityName, deliverable))
                     {
-                        if(await context.CallActivityAsync<bool>(completedStep.CompensationActivityName, deliverable))
-                        {
-                            outputs.Add($"{completedStep.ActivityName} rolled back with {completedStep.CompensationActivityName} successfully.");
-                        } 
-                        else
-                        {
-                            outputs.Add($"{completedStep.CompensationActivityName} failed.");
-                        }
+                        outputs.Add($"{completedStep.ActivityName} rolled back with {completedStep.CompensationActivityName} successfully.");
+                    }
+                    else
+                    {
+                        outputs.Add($"{completedStep.CompensationActivityName} failed.");
+                        throw new Exception($"Unable to complete {completedStep.CompensationActivityName} ");
                     }
                 }
-                catch(Exception)
-                {
-                    logger.LogCritical("Compensation failed");
-                    outputs.Add("Orchestration failed");
-                }
+                outputs.Add("Orchestration failed");
             }
-            
+
             return outputs;
         }
 

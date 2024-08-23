@@ -14,7 +14,7 @@ namespace SimpleOrchestration
     {
       ILogger logger = executionContext.GetLogger("CreateWorkbenchStorage");
       logger.LogInformation("Creating storage for {engagementId}.", engagementId);
-      return true;
+      return false;
     }
 
     [Function(nameof(DeleteWorkbenchStorage))]
