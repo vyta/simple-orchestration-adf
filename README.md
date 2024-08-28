@@ -1,7 +1,5 @@
 # Simple orchestration with Azure Durable Functions
 
-> Note: Both csproj and sln files are provided, remove whichever is unnecessary for your environment
-
 This repo contains the following:
 
 - Simple HTTP trigger to kickoff an orchestration
@@ -47,3 +45,13 @@ az functionapp create \
 
 func azure functionapp publish $FN_NAME
 ```
+
+## Retry Options
+
+This repo implements retry policies in a few different ways to demonstrate the verious options available:
+
+- SimpleOrchestrator relies on retry capabilities built into the DurableTask framework. It uses the [Automatic retry](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=csharp-isolated#automatic-retry-on-failure) but [custom handlers](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=csharp-isolated#custom-retry-handlers) may be used instead. 
+- The HTTP client for use within the EngagementActivity is configured to use [.NET HTTP resiliency extensions](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience) to enable retries upon registration at startup.
+- The WorkbenchActivity implements custom retry policies with [.NET resiliency](https://www.nuget.org/packages/Microsoft.Extensions.Resilience)
+
+This is for demo purposes and users should be careful to avoid stacking retry policies.
