@@ -43,6 +43,7 @@ az functionapp create \
   --storage-account $STORAGE_NAME \
   --os-type Linux
 
+cd src
 func azure functionapp publish $FN_NAME
 ```
 
