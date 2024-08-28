@@ -1,0 +1,1 @@
+Infrastructure-as-Code (IaC) such as Azure Bicep or Terraform should go in this "infra" folder.

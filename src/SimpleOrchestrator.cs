@@ -1,8 +1,5 @@
-using System.Security.Cryptography;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.DurableTask;
-using Microsoft.DurableTask.Client;
 using Microsoft.Extensions.Logging;
 
 namespace SimpleOrchestration
@@ -18,7 +15,7 @@ namespace SimpleOrchestration
 
             var outputs = new List<string>();
 
-            string deliverable = context.GetInput<string>();
+            string? deliverable = context.GetInput<string>();
 
             // Define steps and their compensations
             var steps = new List<(string ActivityName, string CompensationActivityName)>
