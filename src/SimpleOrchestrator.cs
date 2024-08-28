@@ -15,7 +15,7 @@ namespace SimpleOrchestration
 
             var outputs = new List<string>();
 
-            string deliverable = context.GetInput<string>();
+            string? deliverable = context.GetInput<string>();
 
             // Define steps and their compensations
             var steps = new List<(string ActivityName, string CompensationActivityName)>

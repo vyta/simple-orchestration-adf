@@ -17,7 +17,7 @@ namespace SimpleOrchestration
       ILogger logger = executionContext.GetLogger("SimplesOrchestration_HttpStart");
 
       // Function input comes from the request content.
-      string instanceId = req.Query["id"] != null ? req.Query["id"] : Guid.NewGuid().ToString("N");
+      string instanceId = req.Query["id"] ?? Guid.NewGuid().ToString("N");
       await client.ScheduleNewOrchestrationInstanceAsync(nameof(Orchestrator.RunOrchestrator), instanceId, new StartOrchestrationOptions() { InstanceId = instanceId });
 
       logger.LogInformation("Started orchestration with ID = '{instanceId}'.", instanceId);
