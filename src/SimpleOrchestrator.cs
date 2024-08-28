@@ -48,7 +48,12 @@ namespace SimpleOrchestration
                 logger.LogInformation("Starting to execute compensation...");
                 foreach (var completedStep in steps.Take(completed).Reverse())
                 {
-                    if (await context.CallActivityAsync<bool>(completedStep.CompensationActivityName, deliverable))
+                    // if for some reason an activity function is flaky, leverage automatic retry on call
+                    var options = TaskOptions.FromRetryPolicy(new RetryPolicy(
+                        maxNumberOfAttempts: 3,
+                        firstRetryInterval: TimeSpan.FromSeconds(5)));
+                        
+                    if (await context.CallActivityAsync<bool>(completedStep.CompensationActivityName, deliverable, options: options))
                     {
                         outputs.Add($"{completedStep.ActivityName} rolled back with {completedStep.CompensationActivityName} successfully.");
                     }

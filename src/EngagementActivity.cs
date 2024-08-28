@@ -5,14 +5,26 @@ namespace SimpleOrchestration
 {
   public class Engagements
   {
+    private static HttpClient _httpClient = null!;
+
+    public Engagements(IHttpClientFactory httpClientFactory){
+      _httpClient = httpClientFactory.CreateClient("EngagementClient");
+    }
 
     [Function(nameof(CreateEngagement))]
-    public static bool CreateEngagement([ActivityTrigger] string engagementId, FunctionContext executionContext)
+    public async Task<bool> CreateEngagement([ActivityTrigger] string engagementId, FunctionContext executionContext)
     {
       ILogger logger = executionContext.GetLogger("CreateEngagement");
       logger.LogInformation("Creating engagement for {engagementId}.", engagementId);
       // Insert necessary logic to make calls to external services, handle tries and errors
-      return true;
+      var response = await _httpClient.GetAsync("/");
+      if (response.IsSuccessStatusCode)
+      {
+        logger.LogInformation($"HttpRequest successfully made to {_httpClient.BaseAddress}");
+        return true;
+      }
+      logger.LogError($"HttpRequest to {_httpClient.BaseAddress} unsuccessful");
+      return false;
     }
 
     [Function(nameof(DeleteEngagement))]
