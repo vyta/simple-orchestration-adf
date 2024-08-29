@@ -63,7 +63,6 @@ namespace SimpleOrchestration
                         throw new Exception($"Unable to complete {completedStep.CompensationActivityName} ");
                     }
                 }
-                outputs.Add("Orchestration failed");
             }
 
             return outputs;
