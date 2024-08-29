@@ -18,7 +18,7 @@ namespace SimpleOrchestration
     }
 
     [Function(nameof(CreateWorkbenchStorage))]
-    public async Task<string?> CreateWorkbenchStorage([ActivityTrigger] string engagementId, FunctionContext executionContext)
+    public async Task<bool> CreateWorkbenchStorage([ActivityTrigger] string engagementId, FunctionContext executionContext)
     {
       ILogger logger = executionContext.GetLogger("CreateWorkbenchStorage");
       logger.LogInformation("Creating storage for {engagementId}.", engagementId);
@@ -29,14 +29,14 @@ namespace SimpleOrchestration
         if (response.IsSuccessStatusCode)
         {
           logger.LogInformation($"HttpRequest successfully made to {_httpClient.BaseAddress}");
-          return engagementId;
+          return true;
         }
       }
       catch (Exception ex)
       {
         logger.LogError($"HttpRequest to {_httpClient.BaseAddress} unsuccessful. Exception: {ex.Message}.");
       }
-      return null;
+      return false;
     }
 
     [Function(nameof(DeleteWorkbenchStorage))]
