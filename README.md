@@ -19,7 +19,7 @@ flowchart LR
 
 ## Retry Options
 
-This repo implements retry policies in a few different ways to demonstrate the verious options available:
+This repo implements retry policies in a few different ways to demonstrate the various options available:
 
 - SimpleOrchestrator relies on retry capabilities built into the DurableTask framework. It uses the [Automatic retry](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=csharp-isolated#automatic-retry-on-failure) but [custom handlers](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-error-handling?tabs=csharp-isolated#custom-retry-handlers) may be used instead. 
 - The HTTP client for use within the EngagementActivity is configured to use [.NET HTTP resiliency extensions](https://www.nuget.org/packages/Microsoft.Extensions.Http.Resilience) to enable retries upon registration at startup.
