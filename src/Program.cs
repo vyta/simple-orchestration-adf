@@ -13,7 +13,7 @@ var host = new HostBuilder()
         services.AddHttpClient("EngagementClient", client =>
         {
             // configure client here. Ex: client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "<token>");
-            client.BaseAddress = new Uri("https://bing.com");
+            client.BaseAddress = new Uri("https://app-api-xk37pjmwrig4e.azurewebsites.net/");
         })
         .AddStandardResilienceHandler();
 

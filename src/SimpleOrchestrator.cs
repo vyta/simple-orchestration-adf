@@ -30,7 +30,8 @@ namespace SimpleOrchestration
                 foreach (var step in steps)
                 {
                     // Can additionally add retries here with retry options for the activity itself
-                    if (await context.CallActivityAsync<bool>(step.ActivityName, deliverable))
+                    deliverable = await context.CallActivityAsync<string>(step.ActivityName, deliverable);
+                    if (deliverable != null)
                     {
                         completed++;
                         outputs.Add($"{step.ActivityName} completed successfully.");
