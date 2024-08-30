@@ -29,8 +29,15 @@ namespace SimpleOrchestration
             {
                 foreach (var step in steps)
                 {
+                    var success = true;
                     // Can additionally add retries here with retry options for the activity itself
-                    if (await context.CallActivityAsync<bool>(step.ActivityName, deliverable))
+                    if (step.ActivityName == "CreateEngagement")
+                    {
+                        deliverable = await context.CallActivityAsync<string>(step.ActivityName, deliverable);
+                    } else {
+                        success = await context.CallActivityAsync<bool>(step.ActivityName, deliverable);
+                    }
+                    if (deliverable != null && success)
                     {
                         completed++;
                         outputs.Add($"{step.ActivityName} completed successfully.");
